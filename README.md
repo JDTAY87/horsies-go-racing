@@ -10,5 +10,5 @@ SDL2, SDL2\_image, SDL2\_mixer, libpng, zlib, and libmpg123 binaries required.
 Place the mp3 and png files in the program directory.
 
 ## Attribution
-gallop.mp3 found under CC0 license on freesound.org  
+gallop.mp3 by HebronTheatre found under CC0 license on freesound.org  
 jfont.png and horsie.png by JDTAY87
