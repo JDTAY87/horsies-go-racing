@@ -23,6 +23,7 @@ class hrSDL2
         bool rendererstart();
         SDL_Window* window;
         SDL_Renderer* renderer;
+        SDL_GameController* controller;
 };
 
 #endif // HRSDL2_H

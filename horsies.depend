@@ -340,7 +340,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1512351890 c:\test\horsies\include\hrsdl2.h
+1512447537 c:\test\horsies\include\hrsdl2.h
 	<stdio.h>
 	<string>
 	<SDL2/SDL.h>
@@ -352,7 +352,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1512351922 source:c:\test\horsies\src\hrsdl2.cpp
+1512447552 source:c:\test\horsies\src\hrsdl2.cpp
 	"hrsdl2.h"
 
 1512301114 source:c:\test\horsies\src\hrtexture.cpp

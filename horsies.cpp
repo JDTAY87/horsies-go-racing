@@ -61,9 +61,12 @@ void hrGame::settextures()
 
 void hrGame::titlescreen()
 {
-    message[0].setposition( 80, 80 );
+    message[0].setposition( 70, 80 );
     message[0].setmessage( "Horsies Go Racing" );
     message[0].show();
+    message[1].setposition( 40, 100 );
+    message[1].setmessage( "press x key or button a" );
+    message[1].show();
     horsie[0].setposition( 140, 50 );
     horsie[0].setframe( 0 );
     horsie[0].show();
@@ -222,6 +225,29 @@ void hrGame::mainloop()
                         }
                         break;
                     case SDLK_DOWN:
+                        if ( functcounter == 1 )
+                        {
+                            cursorpos = (cursorpos+1)%5;
+                            message[HORSIE_COUNT*2+1].setposition( 10, 40 + cursorpos * 30 );
+                        }
+                        break;
+                }
+            }
+            else if ( e.type == SDL_CONTROLLERBUTTONUP && minimized == false )
+            {
+                switch ( e.cbutton.button )
+                {
+                    case SDL_CONTROLLER_BUTTON_A:
+                        if ( functcounter != 2 ) { (this->*functs[functcounter])(); }
+                        break;
+                    case SDL_CONTROLLER_BUTTON_DPAD_UP:
+                        if ( functcounter == 1 )
+                        {
+                            cursorpos = (cursorpos+4)%5;
+                            message[HORSIE_COUNT*2+1].setposition( 10, 40 + cursorpos * 30 );
+                        }
+                        break;
+                    case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
                         if ( functcounter == 1 )
                         {
                             cursorpos = (cursorpos+1)%5;
