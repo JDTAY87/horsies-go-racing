@@ -82,6 +82,7 @@ SDL_Window* hrSDL2::getwindow()
 
 hrSDL2::~hrSDL2()
 {
+    SDL_GameControllerClose( controller );
     SDL_DestroyRenderer( renderer );
     SDL_DestroyWindow( window );
     IMG_Quit();
