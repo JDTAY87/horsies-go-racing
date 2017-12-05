@@ -21,4 +21,4 @@ set(SRC_FILES
 
 add_executable(horsies ${SRC_FILES})
 
-target_link_libraries(horsies ${SDL2_LIBRARIES} SDL2_image)
+target_link_libraries(horsies ${SDL2_LIBRARIES} SDL2_image SDL2_mixer)

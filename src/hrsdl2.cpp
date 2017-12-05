@@ -10,6 +10,7 @@ bool hrSDL2::start()
     bool success = true;
     if ( !hrSDL2::SDL2start() ) { success = false; }
     else if ( !hrSDL2::imagestart() ) { success = false; }
+    else if ( !hrSDL2::mixerstart() ) { success = false; }
     else if ( !hrSDL2::windowstart() ) { success = false; }
     else if ( !hrSDL2::rendererstart() ) { success = false; }
     return success;
@@ -18,7 +19,7 @@ bool hrSDL2::start()
 bool hrSDL2::SDL2start()
 {
     bool success = true;
-    if ( SDL_Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER) != 0 )
+    if ( SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_GAMECONTROLLER) != 0 )
     {
         printf( "SDL_Init error: %s\n", SDL_GetError() );
         success = false;
@@ -37,6 +38,25 @@ bool hrSDL2::imagestart()
     {
         printf( "IMG_Init error: %s\n", SDL_GetError() );
         success = false;
+    }
+    return success;
+}
+
+bool hrSDL2::mixerstart()
+{
+    bool success = true;
+    if ( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "Mix_OpenAudio error: %s\n", SDL_GetError() );
+        success = false;
+    }
+    else
+    {
+        if ( (Mix_Init(MIX_INIT_MP3)&MIX_INIT_MP3) != MIX_INIT_MP3 )
+        {
+            printf( "Mix_Init error: %s\n", SDL_GetError() );
+            success = false;
+        }
     }
     return success;
 }
@@ -85,6 +105,7 @@ hrSDL2::~hrSDL2()
     SDL_GameControllerClose( controller );
     SDL_DestroyRenderer( renderer );
     SDL_DestroyWindow( window );
+    Mix_Quit();
     IMG_Quit();
     SDL_Quit();
     return;

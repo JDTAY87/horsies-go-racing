@@ -28,6 +28,7 @@ private:
     int cursorpos;
     int places[HORSIE_COUNT];
     int time;
+    Mix_Music* gallop;
 };
 
 bool hrGame::initialize()
@@ -40,6 +41,12 @@ bool hrGame::initialize()
     {
         hrGame::settextures();
         hrGame::titlescreen();
+    }
+    gallop = Mix_LoadMUS( "gallop.mp3" );
+    if ( gallop == NULL )
+    {
+        printf( "Mix_LoadMUS error: %s\n", SDL_GetError() );
+        success = false;
     }
     return success;
 }
@@ -152,13 +159,14 @@ void hrGame::horserace()
         }
     }
     functcounter = 2;
+    message[HORSIE_COUNT*2].setmessage( "And they're off!" );
+    Mix_PlayMusic( gallop, -1 );
     time = SDL_GetTicks();
     return;
 }
 
 void hrGame::showrace()
 {
-    message[HORSIE_COUNT*2].setmessage( "And they're off!" );
     int timeelapsed = SDL_GetTicks() - time;
     for ( int z = 0; z < HORSIE_COUNT; z++ )
     {
@@ -183,6 +191,7 @@ void hrGame::showrace()
         message[HORSIE_COUNT*2].setmessage( "We have a leader!" );
         break;
     case 5:
+        Mix_HaltMusic();
         message[HORSIE_COUNT*2].setmessage( "Winner: " );
         message[HORSIE_COUNT*2+2].setmessage( horsie[places[HORSIE_COUNT-1]].gethorsiename() );
         message[HORSIE_COUNT*2+2].setposition( 90, 10 );
@@ -213,6 +222,9 @@ void hrGame::mainloop()
                     case SDLK_F11:
                         fullscreen = !fullscreen;
                         SDL_SetWindowFullscreen( SDL2.getwindow(), SDL_WINDOW_FULLSCREEN_DESKTOP * fullscreen );
+                        break;
+                    case SDLK_ESCAPE:
+                        quit = true;
                         break;
                     case SDLK_x:
                         if ( functcounter != 2 ) { (this->*functs[functcounter])(); }

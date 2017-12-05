@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 class hrSDL2
 {
@@ -19,6 +20,7 @@ class hrSDL2
     private:
         bool SDL2start();
         bool imagestart();
+        bool mixerstart();
         bool windowstart();
         bool rendererstart();
         SDL_Window* window;
