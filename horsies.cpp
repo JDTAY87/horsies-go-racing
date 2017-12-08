@@ -273,6 +273,7 @@ void hrGame::mainloop()
         if ( minimized == true ) { SDL_Delay( 1 ); }
         else { hrGame::updatescreen(); }
     }
+    Mix_FreeMusic( gallop );
     return;
 }
 
